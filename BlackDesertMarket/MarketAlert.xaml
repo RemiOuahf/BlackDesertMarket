@@ -10,11 +10,33 @@
         <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,234,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=EnhancementLevel}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=PriceFormat}"/>
+                    <GridViewColumn Header="Available At" DisplayMemberBinding="{Binding Path=EndFormat}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="RefreshButton" Content="RefreshQueue" HorizontalAlignment="Left" Margin="516,101,0,0" VerticalAlignment="Top" Height="31" Width="91" Click="RefreshButton_Click"/>
+        <Button Name="RefreshButton" Content="RefreshQueue" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="RefreshButton_Click"/>
+        <Button Name="AddFilterButton" Content="Add" HorizontalAlignment="Left" Margin="286,98,0,0" VerticalAlignment="Top" Click="AddFilterButton_Click"/>
+        <ListView Name="ItemFilter" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="516,51,26,249">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="DeleteFilter" Content="Delete" HorizontalAlignment="Left" Margin="458,103,0,0" VerticalAlignment="Top" Click="DeleteFilter_Click"/>
+        <ListView Name="ItemDBList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,51,534,249">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox Name="DBListSearch" HorizontalAlignment="Left" Margin="15,23,0,0" TextWrapping="Wrap" Text="search item" VerticalAlignment="Top" Width="120" FontStretch="ExtraCondensed"/>
+        <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="516,23,0,0" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120"/>
+        <Button Name ="ShowMoreButton"  Content="Show More" HorizontalAlignment="Left" Margin="286,136,0,0" VerticalAlignment="Top" Click="ShowMoreButton_Click"/>
 
     </Grid>
 </Window>

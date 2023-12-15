@@ -32,6 +32,7 @@ namespace BlackDesertMarket
             InitializeComponent();
             IDTextArea.TextChanged += TextChanged;
             Load();
+            TestFillItems();
         }
 
 
@@ -51,14 +52,32 @@ namespace BlackDesertMarket
         private void FindButton_Click(object sender, RoutedEventArgs e)
         {
             WebAPIRequest request = new WebAPIRequest();
-            APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(request.RequestWithItemID(int.Parse(IDTextArea.Text)));
+            int _id;
+            if (!int.TryParse(IDTextArea.Text, out _id))
+            {
+                //MessageBox.Show("Incorrect ID, string aren't allowed");
+                return;
+            }
+            string _json = request.RequestWithItemID(_id);
+            if (!Utils.IsRequestValid(_json))
+            {
+                //MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
+                return;
+            }
+            APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
             //should be one item at each time
             if(_jsonObject.GetList().Count < 1)
             {
+                //MessageBox.Show("No object found");
                 return;
             }
-            SaveItem _save = new SaveItem();
-            _save.Save(_jsonObject.GetList()[0]);
+            save.Load();
+            if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[0]))
+            {
+                //MessageBox.Show("Already added");
+                return;
+            }
+            save.Save(_jsonObject.GetList()[0]);
             Load();
         }
 
@@ -72,5 +91,62 @@ namespace BlackDesertMarket
                 ItemList.Items.Add(items[i].Name);
             }
         }
+
+        bool IsAlreadyIn(List<Item> _items, Item _toCheck)
+        {
+
+            for(int i = 0; i < _items.Count;i++)
+            {
+                if (_items[i].ID == _toCheck.ID)
+                    return true;
+            }
+            return false;
+        }
+
+        void TestFillItems()
+        {
+            ItemMain.Text = 45.ToString();
+            for(int i =1; i < 5; i++)
+            {
+                ItemSub.Text = i.ToString();
+                FindCategoriesButton_Click(null, new RoutedEventArgs());
+            }
+        }
+        private void FindCategoriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            WebAPIRequest request = new WebAPIRequest();
+            int _main;
+            int _sub;
+            if (!int.TryParse(ItemMain.Text, out _main) || !int.TryParse(ItemSub.Text,out _sub))
+            {
+                MessageBox.Show("Incorrect ID, string aren't allowed");
+                return;
+            }
+            string _json = request.RequestMainSub(_main, _sub);
+            if (!Utils.IsRequestValid(_json))
+            {
+                MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
+                return;
+            }
+            APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
+            //should be one item at each time
+            if (_jsonObject.GetList().Count < 1)
+            {
+                MessageBox.Show("No object found");
+                return;
+            }
+            save.Load();
+            for(int i =0; i < _jsonObject.GetList().Count; i++)
+            {
+                if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[i]))
+                {
+                   MessageBox.Show("Already added");
+                    continue;
+                }
+                save.Save(_jsonObject.GetList()[i]);
+            }
+            Load();
+        }
+
     }
 }

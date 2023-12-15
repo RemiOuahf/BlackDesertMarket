@@ -37,6 +37,11 @@ namespace BlackDesertMarket.API
         {
             return BASE_URL + "/list/queue?" + GetSaveRegionLanguage();
         }
+        
+        string MakeURLMainSubCategories(int _main, int _sub)
+        {
+            return BASE_URL + "/list/" + _main + "/" + _sub + "?" + GetSaveRegionLanguage();
+        } 
 
         public string RequestWithItemID(int _id)
         { 
@@ -65,9 +70,22 @@ namespace BlackDesertMarket.API
             WebRequest request;
             request = WebRequest.Create(_url);
             Stream _object;
-            _object = request.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(_object);
-            return objReader.ReadToEnd();
+            try
+            {
+                _object = request.GetResponse().GetResponseStream();
+                StreamReader objReader = new StreamReader(_object);
+                return objReader.ReadToEnd();
+            }
+            catch (Exception e)
+            {
+                return "Server Error : " + e.ToString();
+            }
+
+        }
+
+        public string RequestMainSub(int _main, int _sub)
+        {
+            return Request(MakeURLMainSubCategories(_main, _sub));
         }
 
         public string RequestQueue()

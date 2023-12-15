@@ -15,6 +15,7 @@ namespace BlackDesertMarket.Save
         public string savePath = Path.Combine(Directory.GetCurrentDirectory(), "Save");
 
         List<Item> items = new List<Item>();
+        List<Item> filter = new List<Item>();
 
         public void Save(Item _toSave)
         {
@@ -34,11 +35,41 @@ namespace BlackDesertMarket.Save
             }
         }
 
+        public List<Item> LoadFilter()
+        {
+            if (File.Exists(Path.Combine(savePath, "Filter.save")))
+            {
+                string _path = File.ReadAllText(Path.Combine(savePath, "Filter.save"));
+                filter = JsonConvert.DeserializeObject<Item[]>(_path).ToList();
+            }
+            return filter;
+        }
+
         public SaveItem()
         {
             Directory.CreateDirectory(savePath);
         }
 
         public List<Item> GetItems() { return  items; }
+
+        public Item GetItemFromID(long id)
+        {
+            Load();
+            
+            for(int i =0; i < items.Count; i++)
+            {
+                if (items[i].ID == id)
+                    return items[i];
+            }
+
+            return null;
+        }
+
+        public void SaveFilter(List<Item> _filter)
+        {
+            string _fileName = Path.Combine(savePath, "Filter.save");
+            string _data = JsonConvert.SerializeObject(_filter);
+            File.WriteAllText(_fileName, _data);
+        }
     }
 }
