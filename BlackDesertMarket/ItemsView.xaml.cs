@@ -17,6 +17,7 @@ using BlackDesertMarket.API;
 using BlackDesertMarket.Items;
 using BlackDesertMarket.Json;
 using BlackDesertMarket.Save;
+using System.Security.Cryptography;
 
 namespace BlackDesertMarket
 {
@@ -32,7 +33,7 @@ namespace BlackDesertMarket
             InitializeComponent();
             IDTextArea.TextChanged += TextChanged;
             Load();
-            TestFillItems();
+            //TestFillItems();
         }
 
 
@@ -55,26 +56,35 @@ namespace BlackDesertMarket
             int _id;
             if (!int.TryParse(IDTextArea.Text, out _id))
             {
-                //MessageBox.Show("Incorrect ID, string aren't allowed");
+                MessageBox.Show("Incorrect ID, string aren't allowed");
                 return;
             }
             string _json = request.RequestWithItemID(_id);
             if (!Utils.IsRequestValid(_json))
             {
-                //MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
+                MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
                 return;
             }
             APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
             //should be one item at each time
             if(_jsonObject.GetList().Count < 1)
             {
-                //MessageBox.Show("No object found");
+                MessageBox.Show("No object found");
                 return;
             }
             save.Load();
-            if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[0]))
+            int _index = IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[0]);
+            if (_index !=-1)
             {
-                //MessageBox.Show("Already added");
+                MessageBoxButton _button = MessageBoxButton.YesNo;
+                MessageBoxResult _result = MessageBox.Show("Already added \n Refresh it ?","Title",_button);
+                if(_result == MessageBoxResult.Yes)
+                {
+                    List<Item> _items = save.GetItems();
+                   _items[_index] = _jsonObject.GetList()[0];
+                    save.Save(_items);
+                    Load();
+                }
                 return;
             }
             save.Save(_jsonObject.GetList()[0]);
@@ -83,24 +93,21 @@ namespace BlackDesertMarket
 
         void Load()
         {
-            ItemList.Items.Clear();
             save.Load();
-            List<Item> items = save.GetItems();
-            for(int i =0; i<items.Count; i++)
-            {
-                ItemList.Items.Add(items[i].Name);
-            }
+            ItemList.ItemsSource = save.GetItems();
+            ItemList.DisplayMemberPath = "Name";
+            ItemList.SelectedValuePath = "ID";
         }
 
-        bool IsAlreadyIn(List<Item> _items, Item _toCheck)
+        int IsAlreadyIn(List<Item> _items, Item _toCheck)
         {
 
             for(int i = 0; i < _items.Count;i++)
             {
                 if (_items[i].ID == _toCheck.ID)
-                    return true;
+                    return i;
             }
-            return false;
+            return -1;
         }
 
         void TestFillItems()
@@ -138,7 +145,7 @@ namespace BlackDesertMarket
             save.Load();
             for(int i =0; i < _jsonObject.GetList().Count; i++)
             {
-                if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[i]))
+                if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[i]) != -1)
                 {
                    MessageBox.Show("Already added");
                     continue;
@@ -148,5 +155,42 @@ namespace BlackDesertMarket
             Load();
         }
 
+        private void ItemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            save.Load();
+            selectedItemDisplay.Content = (Utils.GetItemWithIDFromList(save.GetItems(), (long)ItemList.SelectedValue)).ToString();
+
+        }
+
+        void RefreshAllItem()
+        {
+            save.Load();
+            List<Item> _items = save.GetItems();
+            for(int i =0; i < _items.Count; i++)
+            {
+                WebAPIRequest request = new WebAPIRequest();
+                string _json = request.RequestWithItemID(_items[i].ID);
+                if (!Utils.IsRequestValid(_json))
+                {
+                    //MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
+                    continue;
+                }
+                APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
+                //should be one item at each time
+                if (_jsonObject.GetList().Count < 1)
+                {
+                    //MessageBox.Show("No object found");
+                    continue;
+                }
+                _items[i] = _jsonObject.GetList()[0];
+            }
+            save.Save(_items);
+            Load();
+        }
+
+        private void refreshAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshAllItem();
+        }
     }
 }

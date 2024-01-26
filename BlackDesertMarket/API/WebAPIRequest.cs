@@ -18,7 +18,7 @@ namespace BlackDesertMarket.API
         const string REGION = "region=";
 
 
-        string MakeURLWithID(int _id)
+        string MakeURLWithID(long _id)
         {
             return BASE_URL + "/item/" + _id.ToString() + "?" + GetSaveRegionLanguage() ;
         }
@@ -43,7 +43,7 @@ namespace BlackDesertMarket.API
             return BASE_URL + "/list/" + _main + "/" + _sub + "?" + GetSaveRegionLanguage();
         } 
 
-        public string RequestWithItemID(int _id)
+        public string RequestWithItemID(long _id)
         { 
             return Request(MakeURLWithID(_id));
         }

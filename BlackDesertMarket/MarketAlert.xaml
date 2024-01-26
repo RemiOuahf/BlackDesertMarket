@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MarketAlert" Height="450" Width="800">
+        Title="MarketAlert" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,234,0,0">
             <ListView.View>
@@ -17,8 +17,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="RefreshButton" Content="RefreshQueue" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Height="31" Width="92" Click="RefreshButton_Click"/>
-        <Button Name="AddFilterButton" Content="Add" HorizontalAlignment="Left" Margin="286,98,0,0" VerticalAlignment="Top" Click="AddFilterButton_Click"/>
         <ListView Name="ItemFilter" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="516,51,26,249">
             <ListView.View>
                 <GridView>
@@ -26,7 +24,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="DeleteFilter" Content="Delete" HorizontalAlignment="Left" Margin="458,103,0,0" VerticalAlignment="Top" Click="DeleteFilter_Click"/>
+
         <ListView Name="ItemDBList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,51,534,249">
             <ListView.View>
                 <GridView>
@@ -36,7 +34,13 @@
         </ListView>
         <TextBox Name="DBListSearch" HorizontalAlignment="Left" Margin="15,23,0,0" TextWrapping="Wrap" Text="search item" VerticalAlignment="Top" Width="120" FontStretch="ExtraCondensed"/>
         <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="516,23,0,0" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120"/>
-        <Button Name ="ShowMoreButton"  Content="Show More" HorizontalAlignment="Left" Margin="286,136,0,0" VerticalAlignment="Top" Click="ShowMoreButton_Click"/>
+
+        <Grid Margin="286,51,304,217">
+            <Button Name ="ShowMoreButton"  Content="Show More" HorizontalAlignment="Left" Margin="30,74,0,45" Click="ShowMoreButton_Click" Width="86"/>
+            <Button Name="DeleteFilter" Content="Delete" HorizontalAlignment="Left" Margin="151,44,0,0" VerticalAlignment="Top" Click="DeleteFilter_Click"/>
+            <Button Name="RefreshButton" Content="RefreshQueue" HorizontalAlignment="Center" VerticalAlignment="Top" Height="31" Width="92" Click="RefreshButton_Click"/>
+            <Button Name="AddFilterButton" Content="Add" Margin="0,44,167,0" VerticalAlignment="Top" Click="AddFilterButton_Click" HorizontalAlignment="Right" Width="26"/>
+        </Grid>
 
     </Grid>
 </Window>

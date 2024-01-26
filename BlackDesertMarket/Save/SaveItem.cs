@@ -71,5 +71,18 @@ namespace BlackDesertMarket.Save
             string _data = JsonConvert.SerializeObject(_filter);
             File.WriteAllText(_fileName, _data);
         }
+        public void RemoveItem(Item _item)
+        {
+            items.Remove(_item);
+            string _fileName = Path.Combine(savePath, "Item.save");
+            string _data = JsonConvert.SerializeObject(items);
+            File.WriteAllText(_fileName, _data);
+        }
+        public void Save(List<Item> _items)
+        {
+            string _fileName = Path.Combine(savePath, "Item.save");
+            string _data = JsonConvert.SerializeObject(items);
+            File.WriteAllText(_fileName, _data);
+        }
     }
 }
