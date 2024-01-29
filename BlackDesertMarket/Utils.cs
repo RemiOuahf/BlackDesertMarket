@@ -44,4 +44,19 @@ namespace BlackDesertMarket
             return null;
         }
     }
+
+
+    public static class ListExtension
+    {
+
+        public static bool ContainsID<T>(this List<T> _list, long _ID) where T : IItem
+        {
+            for(int i =0 ; i < _list.Count; i++)
+            {
+                if (_list[i].ID == _ID)
+                    return true;
+            }
+            return false;
+        }
+    }
 }

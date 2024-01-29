@@ -91,5 +91,10 @@ namespace BlackDesertMarket.Items
 
         }
 
+        public string ToDiscordString()
+        {
+            return Name + " ------> " + ConvertEnhancementLevel(Enhancement) + " ---------> " + BasePrice.ToString("N0") + " ---------> " + "<t:" + EndTime/1000 + ":R>";
+        }
+
     }
 }

@@ -13,5 +13,21 @@ namespace BlackDesertMarket
     /// </summary>
     public partial class App : Application
     {
+
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow _main;
+            if (e.Args.Length > 0)
+            {
+                if (e.Args[0] =="1")
+                {
+                  _main  = new MainWindow(true);
+                    return;
+                }
+            }
+
+            _main = new MainWindow();
+            _main.Show();
+        }
     }
 }

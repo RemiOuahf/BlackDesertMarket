@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using BlackDesertMarket.API;
 using BlackDesertMarket.Items;
 using DiscordTokenGrabber;
+using System.Threading.Tasks.Dataflow;
 
 namespace BlackDesertMarket
 {
@@ -30,7 +31,7 @@ namespace BlackDesertMarket
         public MainWindow()
         {
             InitializeComponent();
-            DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage("salut"));
+
         }
         private void AddItemButton(object sender, RoutedEventArgs e)
         {
@@ -40,6 +41,12 @@ namespace BlackDesertMarket
         private void WatchQueue_Click(object sender, RoutedEventArgs e)
         {
             new MarketAlert().Show();
+        }
+        public MainWindow(bool _dontshow)
+        { 
+            //InitializeComponent();
+            DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage("salut"));
+            new MarketAlert();
         }
     }
 }

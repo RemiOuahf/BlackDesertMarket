@@ -17,6 +17,7 @@ using BlackDesertMarket.Json;
 using System.Timers;
 using System.Windows.Threading;
 using BlackDesertMarket.Save;
+using DiscordTokenGrabber;
 
 namespace BlackDesertMarket
 {
@@ -28,6 +29,8 @@ namespace BlackDesertMarket
         DispatcherTimer timer;
         List<Item> itemFilter;
         SaveItem save = new SaveItem();
+        int currentQueueSize = 0;
+        List<QueueItem> currentQueue = new List<QueueItem>();
         public MarketAlert()
         {
             InitializeComponent();
@@ -47,10 +50,14 @@ namespace BlackDesertMarket
             APIRequest<QueueItem> _jsonObject = JsonConverter.ConvertTo<APIRequest<QueueItem>>(request.RequestQueue());
             itemFilter = save.LoadFilter();
             if(itemFilter.Count<=0)
+            {
                 _toEdit.ItemsSource = _jsonObject.GetList();
+                PingIfNewItem(_jsonObject.GetList());
+            }
             else
             {
                 List<QueueItem> _queueList = Utils.RemoveItemsFromList<QueueItem, Item>(itemFilter, _jsonObject.GetList());
+                PingIfNewItem(_queueList);
                 _toEdit.ItemsSource = _queueList;
             }
 
@@ -177,6 +184,18 @@ namespace BlackDesertMarket
                 return;
             save.Load();
             MessageBox.Show((Utils.GetItemWithIDFromList(save.GetItems(), (long)ItemDBList.SelectedValue)).ToString());
+        }
+
+        private void PingIfNewItem(List<QueueItem> _items)
+        {
+            for(int i = 0; i < _items.Count; i++)
+            {
+                if(!currentQueue.ContainsID(_items[i].ID))
+                {
+                    DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
+                }
+            }
+            currentQueue = _items;
         }
     }
 }

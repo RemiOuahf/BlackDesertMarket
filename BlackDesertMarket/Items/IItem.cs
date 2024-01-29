@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackDesertMarket.Items
 {
-    internal interface IItem
+    public interface IItem
     {
         public long ID { get; set; }
     }
