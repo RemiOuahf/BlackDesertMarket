@@ -186,6 +186,7 @@ namespace BlackDesertMarket
             }
             save.Save(_items);
             Load();
+            MessageBox.Show("Refresh succeed");
         }
 
         private void refreshAllButton_Click(object sender, RoutedEventArgs e)

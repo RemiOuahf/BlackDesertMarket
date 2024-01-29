@@ -45,7 +45,7 @@ namespace BlackDesertMarket
         public MainWindow(bool _dontshow)
         { 
             //InitializeComponent();
-            DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage("salut"));
+            //DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage("salut"));
             new MarketAlert();
         }
     }
