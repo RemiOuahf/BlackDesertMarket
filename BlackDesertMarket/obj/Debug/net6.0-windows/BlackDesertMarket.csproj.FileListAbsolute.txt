@@ -21,9 +21,8 @@ D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\BlackDes
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\ref\BlackDesertMarket.dll
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\BlackDesertMarket.csproj.CopyComplete
-D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\MarketQueue.g.cs
-D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\MarketQueue.baml
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\ItemsView.g.cs
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\ItemsView.baml
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\MarketAlert.g.cs
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\MarketAlert.baml
+D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\BlackDesertMarket_Content.g.cs

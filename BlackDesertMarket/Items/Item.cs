@@ -18,7 +18,7 @@ namespace BlackDesertMarket.Items
 
     }
 
-    internal class Item :  IToString, IItem
+    internal class Item :  IToString, IItemID
     {
             public long ID { get; set; }
             public string Name { get; set; }

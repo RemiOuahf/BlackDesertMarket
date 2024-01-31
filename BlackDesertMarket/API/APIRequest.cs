@@ -21,5 +21,10 @@ namespace BlackDesertMarket.API
         {
             return data;
         }
+
+        ~APIRequest()
+        {
+            data.Clear();
+        }
     }
 }

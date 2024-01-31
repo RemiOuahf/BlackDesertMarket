@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" Icon="/Icons/88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png">
     <Grid>
         <Button Content="Add Items" HorizontalAlignment="Left" Margin="523,73,0,0" VerticalAlignment="Top" Height="47" Width="167" Click="AddItemButton"/>
         <Button Name="WatchQueue" Content="Watch Queue" HorizontalAlignment="Left" Margin="523,217,0,0" VerticalAlignment="Top" Height="45" Width="126" Click="WatchQueue_Click"/>

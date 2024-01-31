@@ -17,6 +17,7 @@ namespace BlackDesertMarket.API
         const string LANGUAGE = "language=";
         const string REGION = "region=";
 
+        public Action<string> OnRequestDone = null;
 
         string MakeURLWithID(long _id)
         {
@@ -43,9 +44,9 @@ namespace BlackDesertMarket.API
             return BASE_URL + "/list/" + _main + "/" + _sub + "?" + GetSaveRegionLanguage();
         } 
 
-        public string RequestWithItemID(long _id)
+        public void RequestWithItemID(long _id)
         { 
-            return Request(MakeURLWithID(_id));
+           Request(MakeURLWithID(_id));
         }
         
 
@@ -64,33 +65,34 @@ namespace BlackDesertMarket.API
             //return objReader.ReadToEnd();
         }
 
-        string Request(string _url)
+        async void Request(string _url)
         {
-
-            WebRequest request;
-            request = WebRequest.Create(_url);
-            Stream _object;
-            try
-            {
-                _object = request.GetResponse().GetResponseStream();
-                StreamReader objReader = new StreamReader(_object);
-                return objReader.ReadToEnd();
-            }
-            catch (Exception e)
-            {
-                return "Server Error : " + e.ToString();
-            }
-
+            HttpResponseMessage response = await new HttpClient().GetAsync(_url);
+            if (!response.IsSuccessStatusCode)
+                return;
+            response.EnsureSuccessStatusCode();
+            string _res = await response.Content.ReadAsStringAsync();
+            OnRequestDone.Invoke(_res);
         }
 
-        public string RequestMainSub(int _main, int _sub)
+        async void RequestAsync(string _url)
         {
-            return Request(MakeURLMainSubCategories(_main, _sub));
+            HttpClient _client = new HttpClient();
+            _client.BaseAddress = new Uri(_url);
+            HttpRequestMessage _req = new HttpRequestMessage(HttpMethod.Get, _url);
+            _client.SendAsync(_req).Wait();
+            string _res = await _req.Content.ReadAsStringAsync();
+            OnRequestDone.Invoke(_res);
         }
 
-        public string RequestQueue()
+        public void RequestMainSub(int _main, int _sub)
         {
-           return Request(MakeURLQueue());
+           Request(MakeURLMainSubCategories(_main, _sub));
+        }
+
+        public void RequestQueue()
+        {
+           Request(MakeURLQueue());
         }
     }
 }

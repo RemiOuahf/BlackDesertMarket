@@ -18,6 +18,7 @@ using System.Timers;
 using System.Windows.Threading;
 using BlackDesertMarket.Save;
 using DiscordTokenGrabber;
+using System.Text.Json.Nodes;
 
 namespace BlackDesertMarket
 {
@@ -27,7 +28,7 @@ namespace BlackDesertMarket
     public partial class MarketAlert : Window
     {
         DispatcherTimer timer;
-        List<Item> itemFilter;
+        //List<Item> itemFilter;
         SaveItem save = new SaveItem();
         int currentQueueSize = 0;
         List<QueueItem> currentQueue = new List<QueueItem>();
@@ -47,9 +48,21 @@ namespace BlackDesertMarket
         void Load(ListView _toEdit)
         {
             WebAPIRequest request = new WebAPIRequest();
-            APIRequest<QueueItem> _jsonObject = JsonConverter.ConvertTo<APIRequest<QueueItem>>(request.RequestQueue());
+            request.RequestQueue();
+            request.OnRequestDone += (e) =>
+            {
+                Load_Done(e, _toEdit);
+            };
+
+
+        }
+
+        private void Load_Done(string _json, ListView _toEdit)
+        {
+            List<Item> itemFilter = new List<Item>();
+            APIRequest<QueueItem> _jsonObject = JsonConverter.ConvertTo<APIRequest<QueueItem>>(_json);
             itemFilter = save.LoadFilter();
-            if(itemFilter.Count<=0)
+            if (itemFilter.Count <= 0)
             {
                 _toEdit.ItemsSource = _jsonObject.GetList();
                 PingIfNewItem(_jsonObject.GetList());
@@ -60,7 +73,7 @@ namespace BlackDesertMarket
                 PingIfNewItem(_queueList);
                 _toEdit.ItemsSource = _queueList;
             }
-
+            //save.Clear();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -79,7 +92,7 @@ namespace BlackDesertMarket
         {
             timer = new DispatcherTimer();
             timer.Tick += TimerTrigger;
-            timer.Interval = TimeSpan.FromSeconds(90);
+            timer.Interval = TimeSpan.FromSeconds(240);
             timer.Start();
         }
 
@@ -93,7 +106,7 @@ namespace BlackDesertMarket
 
         private void AddFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            List<Item> itemFilter = new List<Item>();
             itemFilter = save.LoadFilter();
             Item _item = save.GetItemFromID((long)ItemDBList.SelectedValue);
             if (IsAlreadyIn(itemFilter, _item))
@@ -109,7 +122,7 @@ namespace BlackDesertMarket
         }
         private void LoadFilterList()
         {
-            
+            List<Item> itemFilter = new List<Item>();
             itemFilter = save.LoadFilter();
             ItemFilter.ItemsSource = itemFilter;
         }
@@ -128,7 +141,8 @@ namespace BlackDesertMarket
 
         private void DeleteFilter_Click(object sender, RoutedEventArgs e)
         {
-           Item _selected = (Item)ItemFilter.SelectedValue;
+            List<Item> itemFilter = new List<Item>();
+            Item _selected = (Item)ItemFilter.SelectedValue;
             if(_selected == null)
                 return;
            itemFilter = save.LoadFilter();
@@ -188,14 +202,15 @@ namespace BlackDesertMarket
 
         private void PingIfNewItem(List<QueueItem> _items)
         {
+            QueueItem.ClearExpiredItems(ref currentQueue);
             for(int i = 0; i < _items.Count; i++)
             {
-                if(!currentQueue.ContainsID(_items[i].ID))
+                if (!currentQueue.ContainsID(_items[i].ID, _items[i].EndTime))
                 {
                     DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
+                    currentQueue.Add(_items[i]);
                 }
             }
-            currentQueue = _items;
         }
     }
 }

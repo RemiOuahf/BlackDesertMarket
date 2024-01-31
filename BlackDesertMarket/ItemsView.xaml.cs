@@ -18,16 +18,19 @@ using BlackDesertMarket.Items;
 using BlackDesertMarket.Json;
 using BlackDesertMarket.Save;
 using System.Security.Cryptography;
+using System.Reflection;
+using System.Text.Json.Nodes;
+using System.Threading;
 
 namespace BlackDesertMarket
 {
+
     /// <summary>
     /// Interaction logic for ItemsView.xaml
     /// </summary>
     public partial class ItemsView : Window
     {
         SaveItem save = new SaveItem();
-
         public ItemsView()
         {
             InitializeComponent();
@@ -36,6 +39,10 @@ namespace BlackDesertMarket
             //TestFillItems();
         }
 
+        ~ItemsView()
+        {
+            
+        }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -59,7 +66,12 @@ namespace BlackDesertMarket
                 MessageBox.Show("Incorrect ID, string aren't allowed");
                 return;
             }
-            string _json = request.RequestWithItemID(_id);
+            request.RequestWithItemID(_id);
+            request.OnRequestDone += FindButtonClick_Done;
+        }
+        private void FindButtonClick_Done(string _json)
+        {
+            SaveItem save = new SaveItem();
             if (!Utils.IsRequestValid(_json))
             {
                 MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
@@ -67,30 +79,21 @@ namespace BlackDesertMarket
             }
             APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
             //should be one item at each time
-            if(_jsonObject.GetList().Count < 1)
+            if (_jsonObject.GetList().Count < 1)
             {
                 MessageBox.Show("No object found");
                 return;
             }
             save.Load();
             int _index = IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[0]);
-            if (_index !=-1)
+            if (_index != -1)
             {
-                MessageBoxButton _button = MessageBoxButton.YesNo;
-                MessageBoxResult _result = MessageBox.Show("Already added \n Refresh it ?","Title",_button);
-                if(_result == MessageBoxResult.Yes)
-                {
-                    List<Item> _items = save.GetItems();
-                   _items[_index] = _jsonObject.GetList()[0];
-                    save.Save(_items);
-                    Load();
-                }
+                AskToRefreshItem(_index, _jsonObject);
                 return;
             }
             save.Save(_jsonObject.GetList()[0]);
             Load();
         }
-
         void Load()
         {
             save.Load();
@@ -121,7 +124,6 @@ namespace BlackDesertMarket
         }
         private void FindCategoriesButton_Click(object sender, RoutedEventArgs e)
         {
-            WebAPIRequest request = new WebAPIRequest();
             int _main;
             int _sub;
             if (!int.TryParse(ItemMain.Text, out _main) || !int.TryParse(ItemSub.Text,out _sub))
@@ -129,7 +131,21 @@ namespace BlackDesertMarket
                 MessageBox.Show("Incorrect ID, string aren't allowed");
                 return;
             }
-            string _json = request.RequestMainSub(_main, _sub);
+            FindCategories(_main, _sub);
+
+        }
+
+        private void FindCategories(int _main, int _sub, bool _showMessage = true)
+        {
+            WebAPIRequest request = new WebAPIRequest();
+            request.RequestMainSub(_main, _sub);
+            request.OnRequestDone += (e) => FindCategoriesButton_done(e, _showMessage);
+        }
+
+
+        private void FindCategoriesButton_done(string _json, bool _showMessage)
+        {
+            SaveItem save = new SaveItem();
             if (!Utils.IsRequestValid(_json))
             {
                 MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
@@ -143,55 +159,46 @@ namespace BlackDesertMarket
                 return;
             }
             save.Load();
-            for(int i =0; i < _jsonObject.GetList().Count; i++)
+            for (int i = 0; i < _jsonObject.GetList().Count; i++)
             {
-                if (IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[i]) != -1)
+                int _index = IsAlreadyIn(save.GetItems(), _jsonObject.GetList()[i]);
+                if (_index != -1)
                 {
-                   MessageBox.Show("Already added");
+                    RefreshItem(_index, _jsonObject, i);
                     continue;
                 }
                 save.Save(_jsonObject.GetList()[i]);
             }
+            if(_showMessage)
+               MessageBox.Show("Succeed");
             Load();
         }
 
         private void ItemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            SaveItem save = new SaveItem();
             save.Load();
             selectedItemDisplay.Content = (Utils.GetItemWithIDFromList(save.GetItems(), (long)ItemList.SelectedValue)).ToString();
 
         }
-
-        void RefreshAllItem()
+        private void AskToRefreshItem(int _index, APIRequest<Item> _jsonObject, int _jsonIndex = 0)
         {
+            MessageBoxButton _button = MessageBoxButton.YesNo;
+            MessageBoxResult _result = MessageBox.Show("Already added \n Refresh it ?", "Title", _button);
+            if (_result == MessageBoxResult.Yes)
+            {
+                RefreshItem(_index, _jsonObject, _jsonIndex);
+            }
+        }
+        private void RefreshItem(int _index, APIRequest<Item> _jsonObject, int _jsonIndex)
+        {
+            SaveItem save = new SaveItem();
             save.Load();
             List<Item> _items = save.GetItems();
-            for(int i =0; i < _items.Count; i++)
-            {
-                WebAPIRequest request = new WebAPIRequest();
-                string _json = request.RequestWithItemID(_items[i].ID);
-                if (!Utils.IsRequestValid(_json))
-                {
-                    //MessageBox.Show("Error with the request, make sure that the ID is from an marketable object");
-                    continue;
-                }
-                APIRequest<Item> _jsonObject = JsonConverter.ConvertTo<APIRequest<Item>>(_json);
-                //should be one item at each time
-                if (_jsonObject.GetList().Count < 1)
-                {
-                    //MessageBox.Show("No object found");
-                    continue;
-                }
-                _items[i] = _jsonObject.GetList()[0];
-            }
+            _items[_index] = _jsonObject.GetList()[_jsonIndex];
             save.Save(_items);
             Load();
-            MessageBox.Show("Refresh succeed");
         }
 
-        private void refreshAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshAllItem();
-        }
     }
 }

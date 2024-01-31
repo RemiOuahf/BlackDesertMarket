@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using BlackDesertMarket.Items;
+using BlackDesertMarket.Interface;
 
 namespace BlackDesertMarket
 {
@@ -12,9 +13,11 @@ namespace BlackDesertMarket
     {
 
 
-        public static List<T> RemoveItemsFromList<T,Y>(List<Y> _toRemove, List<T> _toConserve) where T : IItem where Y : IItem
+        public static List<T> RemoveItemsFromList<T,Y>(List<Y> _toRemove, List<T> _toConserve) where T : IItemID where Y : IItemID
         {
             List<T> list = new List<T>();
+            if (_toRemove.Count <= 0)
+                return _toConserve;
             for(int i =0; i < _toConserve.Count; i++)
             {
                 for(int y =0; y < _toRemove.Count;y++)
@@ -49,11 +52,11 @@ namespace BlackDesertMarket
     public static class ListExtension
     {
 
-        public static bool ContainsID<T>(this List<T> _list, long _ID) where T : IItem
+        public static bool ContainsID<T>(this List<T> _list, long _ID, long _endTime) where T : IItem
         {
             for(int i =0 ; i < _list.Count; i++)
             {
-                if (_list[i].ID == _ID)
+                if (_list[i].ID == _ID && _list[i].EndTime == _endTime )
                     return true;
             }
             return false;

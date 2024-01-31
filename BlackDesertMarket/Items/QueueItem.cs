@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using BlackDesertMarket.Interface;
 
 namespace BlackDesertMarket.Items
 {
@@ -42,7 +44,7 @@ namespace BlackDesertMarket.Items
         PEN,
     }
 
-    internal class QueueItem : IItem
+    internal class QueueItem : IItemID, IItem
     {
         public long ID { get; set; }
         public string Name { get; set; }
@@ -96,5 +98,19 @@ namespace BlackDesertMarket.Items
             return Name + " ------> " + ConvertEnhancementLevel(Enhancement) + " ---------> " + BasePrice.ToString("N0") + " ---------> " + "<t:" + EndTime/1000 + ":R>";
         }
 
+
+        public static void ClearExpiredItems(ref List<QueueItem> _items)
+        {
+            if(!_items.Any()) return;
+            DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
+            long _currentTime = now.ToUnixTimeMilliseconds();
+            for(int i =0; i < _items.Count; i++)
+            {
+                if (_items[i].EndTime < _currentTime)
+                {
+                    _items.RemoveAt(i);
+                }
+            }
+        }
     }
 }

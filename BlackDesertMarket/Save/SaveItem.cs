@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using BlackDesertMarket.Items;
+using System.DirectoryServices;
 
 namespace BlackDesertMarket.Save
-{
+{ 
+    }
     internal class SaveItem
     {
         public string savePath = Path.Combine(Directory.GetCurrentDirectory(), "Save");
@@ -25,7 +27,11 @@ namespace BlackDesertMarket.Save
             string _data = JsonConvert.SerializeObject(items);
             File.WriteAllText(_fileName, _data);
         }
-
+        ~SaveItem()
+        {
+            items.Clear();
+            filter.Clear();
+        }
       public void Load()
         {
             if(File.Exists(Path.Combine(savePath,"Item.save")))
@@ -61,7 +67,6 @@ namespace BlackDesertMarket.Save
                 if (items[i].ID == id)
                     return items[i];
             }
-
             return null;
         }
 
@@ -84,5 +89,5 @@ namespace BlackDesertMarket.Save
             string _data = JsonConvert.SerializeObject(items);
             File.WriteAllText(_fileName, _data);
         }
-    }
+
 }

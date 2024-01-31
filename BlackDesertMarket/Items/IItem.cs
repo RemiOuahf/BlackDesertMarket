@@ -9,5 +9,6 @@ namespace BlackDesertMarket.Items
     public interface IItem
     {
         public long ID { get; set; }
+        public long EndTime { get; set; }
     }
 }

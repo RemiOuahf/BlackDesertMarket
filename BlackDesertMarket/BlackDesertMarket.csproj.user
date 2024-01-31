@@ -13,9 +13,6 @@
     <Compile Update="MarketAlert.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MarketQueue.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ItemsView.xaml">
@@ -25,9 +22,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MarketAlert.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MarketQueue.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
