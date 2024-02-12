@@ -207,7 +207,7 @@ namespace BlackDesertMarket
             {
                 if (!currentQueue.ContainsID(_items[i].ID, _items[i].EndTime))
                 {
-                    DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
+                    //DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
                     currentQueue.Add(_items[i]);
                 }
             }

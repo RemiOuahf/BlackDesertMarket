@@ -90,4 +90,14 @@ namespace BlackDesertMarket.Save
             File.WriteAllText(_fileName, _data);
         }
 
+    public string GetWebHook()
+    {
+        string _res = "";
+        if(File.Exists(Path.Combine(savePath,"WebHook.save")))
+        {
+            _res = File.ReadAllText(Path.Combine(savePath, "WebHook.save"));
+        }
+        return _res;
+    }
+
 }
