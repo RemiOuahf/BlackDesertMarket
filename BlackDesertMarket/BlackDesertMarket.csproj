@@ -5,8 +5,13 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon>blackSpiritSimple.png</PackageIcon>
     <ApplicationIcon>Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="blackSpiritSimple.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.ico" />
@@ -21,7 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="blackSpiritSimple.png" />
     <Resource Include="Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Icons\blackSpiritSimple.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

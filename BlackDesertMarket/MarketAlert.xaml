@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MarketAlert" Height="450" Width="800" ResizeMode="NoResize" Icon="/Icons/88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png">
+        Title="MarketAlert" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838" >
     <Grid>
         <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,234,0,0" IsSynchronizedWithCurrentItem="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False">
             <ListView.View>

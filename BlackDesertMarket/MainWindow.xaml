@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" Icon="/Icons/88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png">
+        Title="Market Application" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838">
     <Grid>
-        <Button Content="Add Items" HorizontalAlignment="Left" Margin="523,73,0,0" VerticalAlignment="Top" Height="47" Width="167" Click="AddItemButton"/>
-        <Button Name="WatchQueue" Content="Watch Queue" HorizontalAlignment="Left" Margin="523,217,0,0" VerticalAlignment="Top" Height="45" Width="126" Click="WatchQueue_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="788*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Add Items" HorizontalAlignment="Left" Margin="422,73,0,0" VerticalAlignment="Top" Height="47" Width="167" Click="AddItemButton" ToolTip="Add Items to the database" Grid.Column="1"/>
+        <Button Name="WatchQueue" Content="Watch Queue" HorizontalAlignment="Left" Margin="422,217,0,0" VerticalAlignment="Top" Height="45" Width="126" Click="WatchQueue_Click" ToolTip="Look or setup the queue alert" Grid.Column="1"/>
+        <Image HorizontalAlignment="Left" Height="224" VerticalAlignment="Top" Width="202" Stretch="Fill" Source="/blackSpiritSimple.png" Margin="35,73,0,0" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

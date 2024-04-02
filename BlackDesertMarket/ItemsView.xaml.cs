@@ -21,6 +21,7 @@ using System.Security.Cryptography;
 using System.Reflection;
 using System.Text.Json.Nodes;
 using System.Threading;
+using System.ComponentModel;
 
 namespace BlackDesertMarket
 {
@@ -37,11 +38,19 @@ namespace BlackDesertMarket
             IDTextArea.TextChanged += TextChanged;
             Load();
             //TestFillItems();
+            Closing += Close;
         }
 
         ~ItemsView()
         {
-            
+
+        }
+
+        void Close(object sender, CancelEventArgs e)
+        {
+            save = null;
+            ItemList.Resources.Clear();
+            ItemList.ItemsSource = null;
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
