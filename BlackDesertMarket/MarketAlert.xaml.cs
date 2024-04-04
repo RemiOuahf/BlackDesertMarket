@@ -53,8 +53,6 @@ namespace BlackDesertMarket
             {
                 Load_Done(e, _toEdit);
             };
-
-
         }
 
         private void Load_Done(string _json, ListView _toEdit)

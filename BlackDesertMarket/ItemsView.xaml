@@ -7,21 +7,26 @@
         mc:Ignorable="d"
         Title="ItemsView" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838">
     <Grid>
-        <TextBox Name ="IDTextArea" HorizontalAlignment="Left" Margin="112,100,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" Width="120"/>
-        <Button Name ="FindButton"  Content="Find Item" HorizontalAlignment="Left" Margin="282,100,0,0" VerticalAlignment="Top" Click="FindButton_Click"/>
-        <TextBox Name="ItemMain" HorizontalAlignment="Left" Margin="457,64,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="79"/>
-        <TextBox Name="ItemSub" HorizontalAlignment="Left" Margin="594,64,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="73"/>
-        <Button Name="FindCategoriesButton" Content="Find With Categories" HorizontalAlignment="Left" Margin="516,94,0,0" VerticalAlignment="Top" Click="FindCategoriesButton_Click" AutomationProperties.HelpText="Test"/>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="32,154,32,67">
-            <Grid Background="White">
-                <Border BorderBrush="Black" BorderThickness="1" Margin="402,22,34,31">
-                    <Label x:Name="selectedItemDisplay" Content="Select an item" HorizontalAlignment="Center" VerticalAlignment="Center" Height="138" Width="278"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="32,200,32,21">
+            <Grid Background="#FF3C3C3C">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="402,22,34,31" Background="#FF191616">
+                    <Label x:Name="selectedItemDisplay" Content="Select an item" HorizontalAlignment="Center" VerticalAlignment="Center" Height="138" Width="278" Foreground="White" Background="#FF191616"/>
                 </Border>
-                <ListBox Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,22,426,31" MouseDoubleClick="ItemList_MouseDoubleClick" BorderThickness="1" BorderBrush="Black"/>
+                <ListBox Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="22,22,426,31" Foreground="White" MouseDoubleClick="ItemList_MouseDoubleClick" BorderThickness="1" BorderBrush="Black" Background="#FF191616"/>
 
 
             </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="32,31,32,258" Background="#FF3C3C3C">
+            <Grid>
+                <TextBox Name ="IDTextArea" HorizontalAlignment="Left" Margin="57,29,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" Width="120"/>
+                <Button Name ="FindButton"  Content="Find Item" HorizontalAlignment="Left" Margin="90,85,0,0" VerticalAlignment="Top" Click="FindButton_Click"/>
+                <TextBox Name="ItemMain" HorizontalAlignment="Left" Margin="594,20,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="79"/>
+                <TextBox Name="ItemSub" HorizontalAlignment="Left" Margin="597,54,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="73"/>
+                <Button Name="FindCategoriesButton" Content="Find With Categories" HorizontalAlignment="Left" Margin="555,85,0,0" VerticalAlignment="Top" Click="FindCategoriesButton_Click" AutomationProperties.HelpText="Test"/>
+            </Grid>
+
         </Border>
     </Grid>
 </Window>
