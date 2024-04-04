@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using BlackDesertMarket.Save;
 using DiscordTokenGrabber;
 using System.Text.Json.Nodes;
+using System.Threading;
 
 namespace BlackDesertMarket
 {
@@ -49,27 +50,40 @@ namespace BlackDesertMarket
         {
             WebAPIRequest request = new WebAPIRequest();
             request.RequestQueue();
-            request.OnRequestDone += (e) =>
+            request.OnRequestQueueDone += (e) =>
             {
-                Load_Done(e, _toEdit);
+                //Thread.Sleep(1000);
+               Load_Done(e, _toEdit);
             };
         }
 
-        private void Load_Done(string _json, ListView _toEdit)
+        private void Load_Done(APIRequest<QueueItem> _json, ListView _toEdit)
         {
             List<Item> itemFilter = new List<Item>();
-            APIRequest<QueueItem> _jsonObject = JsonConverter.ConvertTo<APIRequest<QueueItem>>(_json);
+            APIRequest<QueueItem> _jsonObject = _json;
             itemFilter = save.LoadFilter();
             if (itemFilter.Count <= 0)
             {
-                _toEdit.ItemsSource = _jsonObject.GetList();
+                _toEdit.Items.Clear();
+                for(int i = 0; i < _jsonObject.GetList().Count;i++)
+                {
+                    _toEdit.Items.Add(_jsonObject.GetList()[i]);
+                }
                 PingIfNewItem(_jsonObject.GetList());
             }
             else
             {
+                _toEdit.Items.Clear();
+                for(int i = 0; i < _toEdit.Items.Count;i++)
+                {
+                    _toEdit.Items.Remove(_toEdit.Items[i]);
+                }
                 List<QueueItem> _queueList = Utils.RemoveItemsFromList<QueueItem, Item>(itemFilter, _jsonObject.GetList());
                 PingIfNewItem(_queueList);
-                _toEdit.ItemsSource = _queueList;
+                for (int i = 0; i < _queueList.Count; i++)
+                {
+                    _toEdit.Items.Add(_queueList[i]);
+                }
             }
             //save.Clear();
         }
@@ -205,7 +219,7 @@ namespace BlackDesertMarket
             {
                 if (!currentQueue.ContainsID(_items[i].ID, _items[i].EndTime))
                 {
-                    //DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
+                    DiscordWebhook.SendMessage(DiscordMessageAPI.CreateMessage(_items[i].ToDiscordString()));
                     currentQueue.Add(_items[i]);
                 }
             }

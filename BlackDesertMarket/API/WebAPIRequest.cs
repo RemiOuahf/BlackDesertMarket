@@ -1,12 +1,15 @@
-﻿using System;
+﻿using BlackDesertMarket.Items;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlackDesertMarket.API
@@ -18,6 +21,7 @@ namespace BlackDesertMarket.API
         const string REGION = "region=";
 
         public Action<string> OnRequestDone = null;
+        public Action<APIRequest<QueueItem>> OnRequestQueueDone = null;
 
         string MakeURLWithID(long _id)
         {
@@ -75,6 +79,19 @@ namespace BlackDesertMarket.API
             OnRequestDone.Invoke(_res);
         }
 
+        async void RequestQueue(string _url)
+        {
+                HttpResponseMessage response = await new HttpClient().GetAsync(_url);
+                if (!response.IsSuccessStatusCode)
+                    return;
+                response.EnsureSuccessStatusCode();
+                byte[] _res = await response.Content.ReadAsByteArrayAsync();
+                string asciiString = Encoding.ASCII.GetString(_res, 0, _res.Length);
+                APIRequest<QueueItem> _finalRes = Json.JsonConverter.ConvertTo<APIRequest<QueueItem>>(asciiString);
+                
+                OnRequestQueueDone?.Invoke(_finalRes);
+        }
+
         async void RequestAsync(string _url)
         {
             HttpClient _client = new HttpClient();
@@ -92,7 +109,7 @@ namespace BlackDesertMarket.API
 
         public void RequestQueue()
         {
-           Request(MakeURLQueue());
+           RequestQueue(MakeURLQueue());
         }
     }
 }

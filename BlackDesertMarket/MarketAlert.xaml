@@ -5,42 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MarketAlert" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838" >
+        Title="MarketAlert" Height="663" Width="1001" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838" >
     <Grid>
-        <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,234,0,0" IsSynchronizedWithCurrentItem="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=EnhancementLevel}"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=PriceFormat}"/>
-                    <GridViewColumn Header="Available At" DisplayMemberBinding="{Binding Path=EndFormat}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <ListView Name="ItemFilter" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="516,51,26,249">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="70,420,70,20" Background="#FF3C3C3C">
+            <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="15,15,15,15" Foreground="Black" IsSynchronizedWithCurrentItem="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False" Background="#FFBBB1B1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=EnhancementLevel}"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=PriceFormat}"/>
+                        <GridViewColumn Header="Available At" DisplayMemberBinding="{Binding Path=EndFormat}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
 
-        <ListView Name="ItemDBList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,51,534,249">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn  Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox Name="DBListSearch" HorizontalAlignment="Left" Margin="15,23,0,0" TextWrapping="Wrap" Text="search item" VerticalAlignment="Top" Width="120" FontStretch="ExtraCondensed"/>
-        <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="516,23,0,0" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120"/>
 
-        <Grid Margin="286,51,304,217">
-            <Button Name ="ShowMoreButton"  Content="Show More" HorizontalAlignment="Left" Margin="30,74,0,45" Click="ShowMoreButton_Click" Width="86"/>
-            <Button Name="DeleteFilter" Content="Delete" HorizontalAlignment="Left" Margin="151,44,0,0" VerticalAlignment="Top" Click="DeleteFilter_Click"/>
-            <Button Name="RefreshButton" Content="RefreshQueue" HorizontalAlignment="Center" VerticalAlignment="Top" Height="31" Width="92" Click="RefreshButton_Click"/>
-            <Button Name="AddFilterButton" Content="Add" Margin="0,44,167,0" VerticalAlignment="Top" Click="AddFilterButton_Click" HorizontalAlignment="Right" Width="26"/>
-        </Grid>
+
+
+        <Button Name="RefreshButton" Content="Refresh Queue" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Height="31" Width="92" Click="RefreshButton_Click" Margin="0,166,0,0" Background="#FF211C1C"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="45,15,600,300">
+            <Grid Background="#FF3C3C3C">
+                <TextBox Name="DBListSearch" Foreground="White" HorizontalAlignment="Left" Margin="15,25,0,0" TextWrapping="Wrap" Text="search item" VerticalAlignment="Top" Width="120" FontStretch="ExtraCondensed" Background="#FF191616"/>
+                <Button Name="AddFilterButton" Foreground="White" Content="Add To Filter" Margin="0,95,20,0" VerticalAlignment="Top" Click="AddFilterButton_Click" HorizontalAlignment="Right" Width="87" Height="31" Background="#FF211C1C"/>
+                <Button Name ="ShowMoreButton" Foreground="White" Content="Show More" Click="ShowMoreButton_Click" Background="#FF211C1C" Margin="0,0,20,134" HorizontalAlignment="Right" Width="87" Height="31" VerticalAlignment="Bottom"/>
+                <ListView Name="ItemDBList" Foreground="Black" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="15,60,125,30" Background="#FFBBB1B1">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="589,15,45,300" Background="#FF3C3C3C">
+            <Grid>
+                <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="15,25,0,0" Foreground="White" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120" Background="#FF191616"/>
+                <Button Name="DeleteFilter" Content="Delete From Filter" HorizontalAlignment="Left" Margin="15,95,0,0" VerticalAlignment="Top" Foreground="White" Click="DeleteFilter_Click" Width="100" Height="31" Background="#FF211C1C"/>
+                <ListView Name="ItemFilter" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="125,60,15,30" Foreground="Black" Background="#FFBBB1B1">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Border>
+
 
     </Grid>
 </Window>
