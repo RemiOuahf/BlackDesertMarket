@@ -61,6 +61,7 @@ namespace BlackDesertMarket.Items
         public string EndFormat { get => ConvertTimestampToDate(EndTime); }
 
         public string PriceFormat { get => BasePrice.ToString("N0"); }
+        public int EnhancementLevelInt { get => ConvertEnhancementLevel(); }
 
         public QueueItem()
         {
@@ -91,6 +92,18 @@ namespace BlackDesertMarket.Items
                 return ((ArmorWeaponLevel)_level).ToString();
             }
 
+        }
+
+        private int ConvertEnhancementLevel()
+        {
+            if (Enhancement < 10)
+            {
+                return ((int)(AccessoryLevel)Enhancement);
+            }
+            else
+            {
+                return ((int)(AccessoryLevel)Enhancement-15);
+            }
         }
 
         public string ToDiscordString()

@@ -40,10 +40,20 @@ namespace BlackDesertMarket
             LoadItemDB();
             InitTimer();
             LoadFilterList();
+            LoadComboBox();
             DBListSearch.TextChanged += DBListOnEnterInput;
             DBListSearch.GotFocus += OnGotFocusSearchBar;
             FilterListSearch.TextChanged += FilterListOnEnterInput;
             FilterListSearch.GotFocus += OnGotFocusSearchBar;
+        }
+
+        void LoadComboBox()
+        {
+            for(int i =0; i < 6; i++)
+            {
+                Enhancement.Items.Add((AccessoryLevel)i);
+
+            }
         }
 
         void Load(ListView _toEdit)

@@ -23,7 +23,7 @@ namespace BlackDesertMarket
                 for(int y =0; y < _toRemove.Count;y++)
                 {
 
-                    if (_toConserve[i]?.ID == _toRemove[y].ID)
+                    if (_toConserve[i]?.ID == _toRemove[y].ID && _toConserve[i]?.EnhancementLevelInt == _toRemove[y].EnhancementLevelInt)
                     {
                         list.Add(_toConserve[i]);
 

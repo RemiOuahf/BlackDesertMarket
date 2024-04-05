@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="MarketAlert" Height="663" Width="1001" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838" >
+        Title="MarketAlert" Height="663" Width="1001" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF646464" >
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" Margin="70,420,70,20" Background="#FF3C3C3C">
             <ListView Name="ItemList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="15,15,15,15" Foreground="Black" IsSynchronizedWithCurrentItem="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False" Background="#FFBBB1B1">
@@ -37,13 +37,14 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <ComboBox Name="Enhancement" HorizontalAlignment="Left" Margin="224,18,0,0" VerticalAlignment="Top" Width="120"/>
             </Grid>
         </Border>
 
         <Border BorderBrush="Black" BorderThickness="1" Margin="589,15,45,300" Background="#FF3C3C3C">
             <Grid>
-                <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="15,25,0,0" Foreground="White" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120" Background="#FF191616"/>
-                <Button Name="DeleteFilter" Content="Delete From Filter" HorizontalAlignment="Left" Margin="15,95,0,0" VerticalAlignment="Top" Foreground="White" Click="DeleteFilter_Click" Width="100" Height="31" Background="#FF211C1C"/>
+                <TextBox Name="FilterListSearch" HorizontalAlignment="Left" Margin="125,25,0,0" Foreground="White" TextWrapping="Wrap" Text="Search filter" VerticalAlignment="Top" Width="120" Background="#FF191616"/>
+                <Button Name="DeleteFilter" Content="Delete From Filter" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Foreground="White" Click="DeleteFilter_Click" Width="110" Height="31" Background="#FF211C1C"/>
                 <ListView Name="ItemFilter" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="125,60,15,30" Foreground="Black" Background="#FFBBB1B1">
                     <ListView.View>
                         <GridView>

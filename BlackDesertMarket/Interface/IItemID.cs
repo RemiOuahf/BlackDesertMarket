@@ -8,6 +8,7 @@ namespace BlackDesertMarket.Interface
 {
     internal interface IItemID
     {
-        public long ID { get; set; }   
+        public long ID { get; set; }
+        public int EnhancementLevelInt { get;}
     }
 }

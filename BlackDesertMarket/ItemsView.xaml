@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="ItemsView" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838">
+        Title="ItemsView" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF646464">
     <Grid>
 
         <Border BorderBrush="Black" BorderThickness="1" Margin="32,200,32,21">
-            <Grid Background="#FF3C3C3C">
+            <Grid Background="#FF544848">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="402,22,34,31" Background="#FFBBB1B1">
                     <Label x:Name="selectedItemDisplay" Content="Select an item" HorizontalAlignment="Center" VerticalAlignment="Center" Height="138" Width="278" Foreground="black" Background="#FFBBB1B1"/>
                 </Border>
@@ -18,13 +18,13 @@
 
             </Grid>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="133,31,133,258" Background="#FF3C3C3C">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="133,31,133,258" Background="#FF544848">
             <Grid>
                 <TextBox Name ="IDTextArea" Foreground="White" HorizontalAlignment="Left" Margin="62,29,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" Width="120" Background="#FF191616"/>
                 <Button Name ="FindButton" Foreground="White" Content="Find Item" HorizontalAlignment="Left" Margin="95,85,0,0" VerticalAlignment="Top" Click="FindButton_Click" Background="#FF211C1C"/>
                 <TextBox Name="ItemMain" Foreground="White" HorizontalAlignment="Left" Margin="380,20,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="78" Background="#FF191616"/>
                 <TextBox Name="ItemSub" Foreground="White" HorizontalAlignment="Left" Margin="382,54,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="74" Background="#FF191616"/>
-                <Button Name="FindCategoriesButton" Foreground="White" Content="Find With Categories" HorizontalAlignment="Left" Margin="340,85,0,0" VerticalAlignment="Top" Click="FindCategoriesButton_Click" AutomationProperties.HelpText="Test" Background="#FF211C1C" RenderTransformOrigin="0.5,0.5">
+                <Button Name="FindCategoriesButton" Foreground="White" Content="Find With Categories" HorizontalAlignment="Left" Margin="340,85,0,0" VerticalAlignment="Top" Click="FindCategoriesButton_Click" RenderTransformOrigin="0.5,0.5" Background="#FF211C1C">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

@@ -18,7 +18,7 @@ namespace BlackDesertMarket.Items
 
     }
 
-    internal class Item :  IToString, IItemID
+    internal class Item : IToString, IItemID
     {
             public long ID { get; set; }
             public string Name { get; set; }
@@ -29,8 +29,9 @@ namespace BlackDesertMarket.Items
             public int SubCategory { get; set; }
             public int Enhancement { get; set; }
             public long TradeCount { get; set; }
+        public int EnhancementLevelInt { get ;}
 
-            public Item(long _id, string _name, int _count, int _grade, long _basePrice, int _mainCategory, int _subCategory, int _enhancement, long _tradeCount)
+        public Item(long _id, string _name, int _count, int _grade, long _basePrice, int _mainCategory, int _subCategory, int _enhancement, long _tradeCount)
             {
                 ID = _id;
                 Name = _name;

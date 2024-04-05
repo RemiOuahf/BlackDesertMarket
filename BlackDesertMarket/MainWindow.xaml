@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlackDesertMarket"
         mc:Ignorable="d"
-        Title="Market Application" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF3E3838">
+        Title="Market Application" Height="450" Width="800" ResizeMode="NoResize" Icon="/blackSpiritSimple.png" Background="#FF646464">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
