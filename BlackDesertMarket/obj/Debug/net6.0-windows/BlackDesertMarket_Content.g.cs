@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/blackspiritsimple.ico")]
 
 

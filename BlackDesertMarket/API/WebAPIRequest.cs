@@ -11,6 +11,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BlackDesertMarket.API
 {
@@ -73,7 +74,10 @@ namespace BlackDesertMarket.API
         {
             HttpResponseMessage response = await new HttpClient().GetAsync(_url);
             if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Request Error");
                 return;
+            }
             response.EnsureSuccessStatusCode();
             string _res = await response.Content.ReadAsStringAsync();
             OnRequestDone.Invoke(_res);

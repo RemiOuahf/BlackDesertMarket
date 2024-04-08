@@ -12,9 +12,11 @@
             <ColumnDefinition Width="788*"/>
             <ColumnDefinition Width="13*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Add Items" HorizontalAlignment="Left" Foreground="White" Margin="422,112,0,0" VerticalAlignment="Top" Height="47" Width="167" Click="AddItemButton" ToolTip="Add Items to the database" Grid.Column="1" Background="#FF211C1C"/>
-        <Button Name="WatchQueue" Foreground="White" Content="Watch Queue" HorizontalAlignment="Left" Margin="422,252,0,0" VerticalAlignment="Top" Height="45" Width="167" Click="WatchQueue_Click" ToolTip="Look or setup the queue alert" Grid.Column="1" Background="#FF211C1C"/>
+        <Button Content="Add Items" HorizontalAlignment="Left" Foreground="White" Margin="422,112,0,0" VerticalAlignment="Top" Height="45" Width="167" Click="AddItemButton" ToolTip="Add Items to the database" Grid.Column="1" Background="#FF211C1C"/>
+        <Button Name="WatchQueue" Content="Watch Queue" Foreground="White" HorizontalAlignment="Left" Margin="422,252,0,0" VerticalAlignment="Top" Height="45" Width="167" Click="WatchQueue_Click" ToolTip="Look or setup the queue alert" Grid.Column="1" Background="#FF211C1C" BorderBrush="#FF707070">
+        </Button>
         <Image HorizontalAlignment="Left" Height="224" VerticalAlignment="Center" Width="202" Stretch="Fill" Source="/blackSpiritSimple.png" Margin="45,0,0,0" Grid.ColumnSpan="2"/>
+
 
     </Grid>
 </Window>

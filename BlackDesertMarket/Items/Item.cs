@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,9 @@ namespace BlackDesertMarket.Items
             public int SubCategory { get; set; }
             public int Enhancement { get; set; }
             public long TradeCount { get; set; }
-        public int EnhancementLevelInt { get ;}
+        public int EnhancementLevelInt { get => ConvertEnhancementLevel() ;}
+
+        public string NameEnhancement { get => ((AccessoryLevel)EnhancementLevelInt).ToString(); }
 
         public Item(long _id, string _name, int _count, int _grade, long _basePrice, int _mainCategory, int _subCategory, int _enhancement, long _tradeCount)
             {
@@ -59,5 +62,16 @@ namespace BlackDesertMarket.Items
                 + "Count :" + Count;
         }
 
+        private int ConvertEnhancementLevel()
+        {
+            if (Enhancement < 10)
+            {
+                return ((int)(AccessoryLevel)Enhancement);
+            }
+            else
+            {
+                return ((int)(AccessoryLevel)Enhancement - 15);
+            }
+        }
     }
 }

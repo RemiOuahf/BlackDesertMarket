@@ -101,6 +101,7 @@ namespace BlackDesertMarket
                 return;
             }
             save.Save(_jsonObject.GetList()[0]);
+            MessageBox.Show("Added");
             Load();
         }
         void Load()

@@ -26,3 +26,4 @@ D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\refint\B
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\BlackDesertMarket.pdb
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\BlackDesertMarket.genruntimeconfig.cache
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\ref\BlackDesertMarket.dll
+D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Debug\net6.0-windows\App.baml

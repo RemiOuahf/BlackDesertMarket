@@ -54,6 +54,7 @@ namespace BlackDesertMarket
                 Enhancement.Items.Add((AccessoryLevel)i);
 
             }
+            Enhancement.SelectedIndex = 0;
         }
 
         void Load(ListView _toEdit)
@@ -131,6 +132,7 @@ namespace BlackDesertMarket
             List<Item> itemFilter = new List<Item>();
             itemFilter = save.LoadFilter();
             Item _item = save.GetItemFromID((long)ItemDBList.SelectedValue);
+            _item.Enhancement = (int)Enhancement.SelectedValue;
             if (IsAlreadyIn(itemFilter, _item))
             {
                 MessageBox.Show("Already in the filter");
@@ -153,7 +155,7 @@ namespace BlackDesertMarket
         {
             for(int i = 0; i < _list.Count; i++)
             {
-                if (_list[i].ID == _object.ID)
+                if (_list[i].ID == _object.ID && _list[i].EnhancementLevelInt == _object.EnhancementLevelInt)
                 {
                     return true;
                 }

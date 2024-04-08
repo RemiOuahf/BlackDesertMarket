@@ -6,16 +6,17 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <PackageIcon>blackSpiritSimple.png</PackageIcon>
-    <ApplicationIcon>Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\blackSpiritSimple.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="blackSpiritSimple.png" />
     <None Remove="button.png" />
+    <None Remove="buttonPushed.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.ico" />
+    <Content Include="Icons\blackSpiritSimple.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
   <ItemGroup>
     <Resource Include="blackSpiritSimple.png" />
     <Resource Include="button.png" />
+    <Resource Include="buttonPushed.png" />
     <Resource Include="Icons\88-883023_sword-art-online-asuna-yuuki-hyper-accion-hd.png" />
   </ItemGroup>
 

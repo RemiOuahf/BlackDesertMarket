@@ -49,6 +49,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=NameEnhancement}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

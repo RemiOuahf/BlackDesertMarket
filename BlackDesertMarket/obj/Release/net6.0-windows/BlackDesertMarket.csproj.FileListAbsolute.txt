@@ -26,3 +26,4 @@ D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Release\net6.0-windows\ref\Bl
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Release\net6.0-windows\BlackDesertMarket_Content.g.cs
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\bin\Release\net6.0-windows\Newtonsoft.Json.dll
 D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Release\net6.0-windows\BlackDesertMarket.csproj.CopyComplete
+D:\Prog\C#\BlackDesertMarket\BlackDesertMarket\obj\Release\net6.0-windows\App.baml
